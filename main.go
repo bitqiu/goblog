@@ -1,7 +1,9 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
+	"github.com/go-sql-driver/mysql"
 	"html/template"
 	"net/http"
 	"net/url"
@@ -9,6 +11,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/gorilla/mux"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var router = mux.NewRouter()
@@ -128,6 +131,10 @@ func removeTrailingSlash(next http.Handler) http.Handler {
 		// 2. 将请求传递下去
 		next.ServeHTTP(w, r)
 	})
+}
+
+func init() {
+	sql.Register("mysql", &mysql.MySQLDriver{})
 }
 
 func main() {
