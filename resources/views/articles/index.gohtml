@@ -10,6 +10,7 @@
     {{ range $key, $article := . }}
         <li><a href="{{ $article.Link }}"><strong>{{ $article.ID }}</strong>: {{ $article.Title }}</a></li>
     {{ end }}
+
 </ul>
 </body>
 </html>
