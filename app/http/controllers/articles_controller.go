@@ -6,12 +6,10 @@ import (
 	"goblog/app/models/article"
 	"goblog/pkg/logger"
 	"goblog/pkg/route"
-	"goblog/pkg/types"
 	"gorm.io/gorm"
 	"html/template"
 	"net/http"
 	"path/filepath"
-	"strconv"
 	"unicode/utf8"
 )
 
@@ -58,7 +56,7 @@ func (*ArticlesController) Show(w http.ResponseWriter, r *http.Request) {
 	id := route.GetRouteVariable("id", r)
 
 	// 2. 读取对应的文章数据
-	article, err := article.Get(id)
+	_article, err := article.Get(id)
 
 
 	if err != nil {
@@ -87,12 +85,12 @@ func (*ArticlesController) Show(w http.ResponseWriter, r *http.Request) {
 		tmpl, err := template.New("show.gohtml").
 			Funcs(template.FuncMap{
 				"RouteName2URL": route.Name2URL,
-				"Int64ToString": types.Int64ToString,
 			}).ParseFiles(newFiles...)
 		logger.LogError(err)
+		fmt.Println(_article)
 
 		// 4.4 渲染模板，将所有文章的数据传输进去
-		tmpl.ExecuteTemplate(w, "app", article)
+		tmpl.ExecuteTemplate(w, "app", _article)
 	}
 }
 
@@ -156,7 +154,7 @@ func (*ArticlesController) Store(w http.ResponseWriter, r *http.Request) {
 		_article.Create()
 
 		if _article.ID > 0 {
-			fmt.Fprint(w, "插入成功，ID 为"+strconv.FormatInt(_article.ID, 10))
+			fmt.Fprint(w, "插入成功，ID 为"+_article.GetStringID())
 		} else {
 			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprint(w,  "500 服务器内部错误")
