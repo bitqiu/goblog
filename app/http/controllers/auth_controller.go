@@ -50,7 +50,7 @@ func (*AuthController) DoRegister(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprint(w, "插入成功，ID 为"+_user.GetStringID())
 		} else {
 			w.WriteHeader(http.StatusInternalServerError)
-			fmt.Fprint(w, "创建文章失败，请联系管理员")
+			fmt.Fprint(w, "创建用户失败，请联系管理员")
 		}
 	}
 
