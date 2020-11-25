@@ -42,7 +42,6 @@ func Attempt(email string, password string) error {
 			return errors.New("内部错误，请稍后尝试")
 		}
 	}
-
 	// 3. 匹配密码
 	if !_user.ComparePassword(password) {
 		return errors.New("账号不存在或密码错误")

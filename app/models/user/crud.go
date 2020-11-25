@@ -16,11 +16,6 @@ func (user *User) Create() (err error) {
 	return nil
 }
 
-// ComparePassword 对比密码是否匹配
-func (u User) ComparePassword(password string) bool  {
-	return u.Password == password
-}
-
 // Get 通过 ID 获取用户
 func Get(idstr string) (User, error) {
 	var user User
