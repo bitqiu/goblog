@@ -39,10 +39,15 @@ func RegisterWebRoutes(r *mux.Router) {
 	// 用户认证
 	auc := new(controllers.AuthController)
 	r.HandleFunc("/auth/register", auc.Register).Methods("GET").Name("auth.register")
-	r.HandleFunc("/auth/doregister", auc.DoRegister).Methods("POST").Name("auth.doregister")
+	r.HandleFunc("/auth/register", auc.DoRegister).Methods("POST").Name("auth.doregister")
 	r.HandleFunc("/auth/login", auc.Login).Methods("GET").Name("auth.login")
-	r.HandleFunc("/auth/dologin", auc.DoLogin).Methods("POST").Name("auth.dologin")
+	r.HandleFunc("/auth/login", auc.DoLogin).Methods("POST").Name("auth.dologin")
 	r.HandleFunc("/auth/logout", auc.Logout).Methods("POST").Name("auth.logout")
+
+	r.HandleFunc("/auth/password", auc.Password).Methods("GET").Name("auth.password")
+	r.HandleFunc("/auth/password/email", auc.SendEmail).Methods("POST").Name("auth.email")
+	r.HandleFunc("/auth/password/{token}", auc.PasswordToken).Methods("GET").Name("auth.password.token")
+	r.HandleFunc("/auth/password", auc.DoPassword).Methods("POST").Name("auth.dopassword")
 
 
 	r.Use(middlewares.StartSession)

@@ -81,3 +81,26 @@ func (*AuthController) Logout(w http.ResponseWriter, r *http.Request) {
 	auth.Logout()
 	http.Redirect(w, r, "/", http.StatusFound)
 }
+
+// Password 找回密码
+func (*AuthController) Password(w http.ResponseWriter, r *http.Request) {
+	view.RenderSimple(w, view.D{}, "auth.password")
+}
+
+func (*AuthController) PasswordToken(w http.ResponseWriter, r *http.Request) {
+	view.RenderSimple(w, view.D{}, "auth.password")
+}
+
+func (*AuthController) DoPassword(w http.ResponseWriter, r *http.Request) {
+	view.RenderSimple(w, view.D{}, "auth.password")
+}
+
+func (*AuthController) SendEmail(w http.ResponseWriter, r *http.Request) {
+	email := r.PostFormValue("email")
+	fmt.Println(email)
+	view.RenderSimple(w, view.D{
+		//"Error":    err.Error(),
+		"Email":    email,
+	}, "auth.email")
+
+}

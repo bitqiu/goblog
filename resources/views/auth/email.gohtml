@@ -1,0 +1,28 @@
+{{define "title"}}
+  发送成功
+{{end}}
+
+{{define "main"}}
+  <div class="blog-post bg-white p-5 rounded shadow mb-4">
+
+    <h3 class="mb-5 text-center">发送成功</h3>
+
+    <div class="mb-3 mb-0 mt-4 text-center">
+      邮箱 {{ .Email }} 发送成功
+    </div>
+
+    <div class="mb-3 mb-0 mt-4 text-center">
+      <p>邮件内容</p>
+
+      密码重置地址 <a href="{{ RouteName2URL "auth.password.token" "token" .Email }}">{{ RouteName2URL "auth.password.token" "token" .Email }}</a>
+    </div>
+
+  </div>
+
+
+  <div class="mb-3">
+    <a href="/" class="text-sm text-muted"><small>返回首页</small></a>
+    <a href="{{ RouteName2URL "auth.login" }}" class="text-sm text-muted float-right"><small>登录</small></a>
+  </div>
+
+{{end}}
